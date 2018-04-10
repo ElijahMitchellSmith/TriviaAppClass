@@ -10,10 +10,10 @@ public class Question implements Parcelable{
     private String wronganswer2;
     private String wronganser3;
 
-    public Question(String correctAnswer, String wronganswer, String title, String wronganswer2, String wronganser3) {
+    public Question(String title, String correctAnswer, String wronganswer, String wronganswer2, String wronganser3) {
+        this.title = title;
         this.correctAnswer = correctAnswer;
         this.wronganswer = wronganswer;
-        this.title = title;
         this.wronganswer2 = wronganswer2;
         this.wronganser3 = wronganser3;
     }
@@ -22,9 +22,9 @@ public class Question implements Parcelable{
     }
 
     protected Question(Parcel in) {
+        title = in.readString();
         correctAnswer = in.readString();
         wronganswer = in.readString();
-        title = in.readString();
         wronganswer2 = in.readString();
         wronganser3 = in.readString();
     }
@@ -68,9 +68,9 @@ public class Question implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
         dest.writeString(correctAnswer);
         dest.writeString(wronganswer);
-        dest.writeString(title);
         dest.writeString(wronganswer2);
         dest.writeString(wronganser3);
     }

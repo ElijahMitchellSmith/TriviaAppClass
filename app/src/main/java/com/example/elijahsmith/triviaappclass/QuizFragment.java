@@ -1,10 +1,8 @@
 package com.example.elijahsmith.triviaappclass;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class QuizFragment extends android.support.v4.app.Fragment implements Parcelable {
+public class QuizFragment extends Fragment {
 
     @BindView(R.id.textView)
     protected TextView textView;
@@ -63,16 +61,6 @@ public class QuizFragment extends android.support.v4.app.Fragment implements Par
         this.quizCallback = quizCallback;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
-
     public interface QuizCallback {
 
         void quizFinished(int correctAnswers);
@@ -82,6 +70,7 @@ public class QuizFragment extends android.support.v4.app.Fragment implements Par
 
         question = questionsList.get(questionListPosition);
         textView.setText(question.getTitle());
+
         List<Button> buttonList = new ArrayList<>();
         buttonList.add(answerOne);
         buttonList.add(answerTwo);
@@ -107,7 +96,7 @@ public class QuizFragment extends android.support.v4.app.Fragment implements Par
         disableButtons();
         questionListPosition++;
         if (question.getCorrectAnswer().equals(answer)){
-            textView.setText("Correct!");
+            textView.setText(R.string.correct);
             correctAnswers++;
 
         } else {
