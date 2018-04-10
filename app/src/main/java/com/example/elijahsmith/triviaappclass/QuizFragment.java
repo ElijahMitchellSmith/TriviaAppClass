@@ -104,21 +104,15 @@ public class QuizFragment extends android.support.v4.app.Fragment implements Par
     }
 
     private void checkAnswer(String answer) {
+        disableButtons();
         questionListPosition++;
         if (question.getCorrectAnswer().equals(answer)){
             textView.setText("Correct!");
             correctAnswers++;
-            answerOne.setEnabled(false);
-            answerTwo.setEnabled(false);
-            answerThree.setEnabled(false);
-            answerFour.setEnabled(false);
 
         } else {
             textView.setText(getString(R.string.wrong_answer_text,question.getCorrectAnswer()));
-            answerOne.setEnabled(false);
-            answerTwo.setEnabled(false);
-            answerThree.setEnabled(false);
-            answerFour.setEnabled(false);
+
 
 
         }
@@ -137,11 +131,14 @@ public class QuizFragment extends android.support.v4.app.Fragment implements Par
 
     @OnClick(R.id.next_button)
     protected void nextButtonClicked() {
+        enableButtons();
         if (questionListPosition <= questionsList.size()-1) {
             populateQuizContent();
 
+
         } else {
             quizCallback.quizFinished(correctAnswers);
+            enableButtons();
         }
 
 
@@ -168,5 +165,17 @@ public class QuizFragment extends android.support.v4.app.Fragment implements Par
     @OnClick(R.id.answer_four_button)
     protected void buttonFourClicked() {
         checkAnswer(answerFour.getText().toString());
+    }
+    private void enableButtons() {
+        answerOne.setEnabled(true);
+        answerTwo.setEnabled(true);
+        answerThree.setEnabled(true);
+        answerFour.setEnabled(true);
+    }
+    private void disableButtons() {
+        answerOne.setEnabled(false);
+        answerTwo.setEnabled(false);
+        answerThree.setEnabled(false);
+        answerFour.setEnabled(false);
     }
 }
